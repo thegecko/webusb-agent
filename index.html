@@ -1,18 +1,35 @@
 <html>
     <head>
         <title>WebUSB Agent</title>
+        <style>
+            p {
+                white-space: pre-wrap;
+            }
+        </style>
     </head>
     <body>
+        <input type="text" id="input" />
+        <button id="send">Send</button>
+        <p id="output"></p>
         <script>
-            const socket = new WebSocket("ws://127.0.0.1:8080");
+            const inputEl = document.getElementById("input");
+            const sendEl = document.getElementById("send");
+            const outputEl = document.getElementById("output");
 
+            const socket = new WebSocket("ws://127.0.0.1:8080");
+            
             socket.onmessage = event => {
-                console.log(`Received: ${event.data}`);
+                outputEl.innerHTML += `Receved: ${event.data}\n`;
             };
 
             socket.onopen = event => {
-                socket.send("Here's some text that the server is urgently awaiting!"); 
+                socket.send("Connected"); 
             };
+
+            sendEl.onclick = () => {
+                const input = inputEl.value;
+                socket.send(input); 
+            }
         </script>
     </body>
 </html>
