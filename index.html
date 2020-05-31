@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <title>WebUSB Agent</title>
+    </head>
+    <body>
+        <script>
+            const socket = new WebSocket("ws://127.0.0.1:8080");
+
+            socket.onmessage = event => {
+                console.log(`Received: ${event.data}`);
+            };
+
+            socket.onopen = event => {
+                socket.send("Here's some text that the server is urgently awaiting!"); 
+            };
+        </script>
+    </body>
+</html>
