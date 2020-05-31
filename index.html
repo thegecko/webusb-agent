@@ -8,27 +8,33 @@
         </style>
     </head>
     <body>
-        <input type="text" id="input" />
-        <button id="send">Send</button>
+        <button id="find">Find</button>
         <p id="output"></p>
+        <script src="./webusb.umd.js"></script>
         <script>
-            const inputEl = document.getElementById("input");
-            const sendEl = document.getElementById("send");
+            const findEl = document.getElementById("find");
             const outputEl = document.getElementById("output");
 
-            const socket = new WebSocket("ws://127.0.0.1:8080");
-            
-            socket.onmessage = event => {
-                outputEl.innerHTML += `Receved: ${event.data}\n`;
+            const devicesFound = async devices => {
+                return devices[0];
             };
 
-            socket.onopen = event => {
-                socket.send("Connected"); 
-            };
+            let usb = new webusb.USB({
+                devicesFound,
+                adapter: new webusb.WSAdapter("ws://127.0.0.1:8080")
+            });
 
-            sendEl.onclick = () => {
-                const input = inputEl.value;
-                socket.send(input); 
+            // usb = navigator.usb;
+
+            findEl.onclick = async () => {
+                try {
+                    const device = await usb.requestDevice({
+                        filters: [{vendorId: 0x0d28}, {vendorId: 0x0483}]
+                    });
+                    console.log(device);
+                } catch (error) {
+                    console.log(error.message);
+                }
             }
         </script>
     </body>
