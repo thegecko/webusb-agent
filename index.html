@@ -31,9 +31,10 @@
                     const device = await usb.requestDevice({
                         filters: [{vendorId: 0x0d28}, {vendorId: 0x0483}]
                     });
-                    console.log(device);
+                    const result = JSON.stringify(device, null, "\t");
+                    outputEl.innerHTML += result;
                 } catch (error) {
-                    console.log(error.message);
+                    outputEl.innerHTML += error.message;
                 }
             }
         </script>

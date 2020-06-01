@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
-    "pkg": "pkg --targets node10-win-x64,node10-macos-x64,node10-linux-x64 --out-path binaries dist/index.js"
+    "pkg": "pkg --targets node10-win-x64,node10-macos-x64,node10-linux-x64 --output bin/agent dist/index.js"
   },
   "repository": {
     "type": "git",
