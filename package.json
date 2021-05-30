@@ -20,7 +20,7 @@
   "homepage": "https://github.com/thegecko/webusb-agent#readme",
   "dependencies": {
     "webusb": "^2.0.2",
-    "ws": "^7.3.0"
+    "ws": "^7.4.6"
   },
   "devDependencies": {
     "@types/usb": "^1.5.1",
